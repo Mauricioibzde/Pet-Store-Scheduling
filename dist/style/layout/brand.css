@@ -1,0 +1,24 @@
+/* =========================
+   Marca (brand)
+   ========================= */
+.brand-chip{
+  position: relative;
+  top: -2px;
+  left: -4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px 10px 10px;
+  background: #2E2C30;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: #dde0f5;
+  z-index: 10000;
+}
+.brand-chip .brand-icon{
+  width: 28px; height: 28px;
+  display: grid; place-items: center;
+  border-radius: 6px;
+  font-size: 16px;
+}
+.brand-chip .brand-text{ font-weight: 700; letter-spacing: .2px; font-size: 14px; }

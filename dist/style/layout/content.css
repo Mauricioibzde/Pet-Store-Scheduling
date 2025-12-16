@@ -1,0 +1,22 @@
+/* =========================
+   Layout e conteúdo
+   ========================= */
+main { display: grid; }
+
+.content{
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 64px 24px 140px;
+}
+.titles h1{ margin: 0 0 6px; font-size: 34px; font-weight: 700; }
+.titles p{ margin: 0; color: var(--muted); }
+
+.toolbar{
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 26px;
+}
+

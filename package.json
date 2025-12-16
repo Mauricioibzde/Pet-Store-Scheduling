@@ -1,0 +1,37 @@
+{
+  "name": "projeto-desafio-rocket-seat",
+  "version": "1.0.0",
+  "description": "A simple and elegant **dark-themed UI** for **Pet Shop scheduling**. This is a **static project** (HTML + CSS + JavaScript) focused on **consistent design**, **accessibility**, and **modular code organization**.",
+  "main": "index.js",
+  "scripts": {
+    "server": "json-server --watch server.json --port 3333",
+    "build": "webpack",
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mauricioibzde/Pet-Store-Scheduling.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mauricioibzde/Pet-Store-Scheduling/issues"
+  },
+  "homepage": "https://github.com/Mauricioibzde/Pet-Store-Scheduling#readme",
+  "dependencies": {
+    "json-server": "^1.0.0-beta.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "babel-loader": "^10.0.0",
+    "copy-webpack-plugin": "^13.0.1",
+    "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.5",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.103.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
+  }
+}
