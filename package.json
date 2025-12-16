@@ -36,7 +36,8 @@
   },
   "dependencies": {
     "core-js": "^3.37.0",
-    "dayjs": "^1.11.19"
+    "dayjs": "^1.11.19",
+    "install": "^0.13.0"
   },
   "browserslist": [
     "defaults",
