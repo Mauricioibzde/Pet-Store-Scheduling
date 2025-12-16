@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
+
 module.exports = {
   target: "web",
   mode: "development",
@@ -11,6 +12,7 @@ module.exports = {
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
+    publicPath: "/",   // ✅ garante que os assets sejam resolvidos corretamente
     clean: true
   },
 
@@ -25,22 +27,16 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      // ✅ index.html está na raiz do projeto
-      template: path.resolve(__dirname, "index.html"),
-     // favicon: path.resolve(__dirname, "src", "assets", "icon"),
-      publicPath: "/"   // garante que os assets sejam resolvidos a partir de dist/
+      template: path.resolve(__dirname, "index.html")
+      // favicon: path.resolve(__dirname, "assets", "icon", "favicon.ico") // opcional
     }),
 
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, "src", "assets", "icon"),
+          from: path.resolve(__dirname, "assets", "icon"),
           to: path.resolve(__dirname, "dist", "assets", "icon")
-        },
-        {
-          from: path.resolve(__dirname, "src", "style"),
-          to: path.resolve(__dirname, "dist", "style"),
-        },
+        }
       ]
     })
   ],
@@ -61,14 +57,13 @@ module.exports = {
           }
         }
       },
-    {
-  test: /\.svg$/,
-  type: "asset/resource",
-  generator: {
-    filename: "assets/icon/[name][ext]"
-  }
-}
-
+      {
+        test: /\.svg$/,
+        type: "asset/resource",
+        generator: {
+          filename: "assets/icon/[name][ext]"
+        }
+      }
     ]
   }
 };

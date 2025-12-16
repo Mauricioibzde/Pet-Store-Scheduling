@@ -18,7 +18,7 @@
   transform: translateY(-50%);
   width: var(--arrow-size);
   height: var(--arrow-size);
-  background: url("../../assets/icon/arrow.svg") center/contain no-repeat;
+  background: url("/assets/icon/arrow.svg") center/contain no-repeat;
   pointer-events: none;
 }
 .picker select{

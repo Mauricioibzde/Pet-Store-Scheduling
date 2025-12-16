@@ -1,119 +1,159 @@
-﻿# 🐾 Mundo Pet — Agenda
-
-A simple and elegant **dark-themed UI** for **Pet Shop scheduling**. This is a **static project** (HTML + CSS + JavaScript) focused on **consistent design**, **accessibility**, and **modular code organization**.
-
-![Mundo Pet — Agenda](./Screenshot.png)
+﻿
 
 ---
 
-## ✨ Overview
+# 🐾 Pet Store Scheduling
 
-**Mundo Pet — Agenda** was built to demonstrate good UI/UX practices in front-end projects without external dependencies or build steps. It includes custom, accessible, and visually consistent components using **CSS variables (design tokens)** and **vanilla JavaScript**.
-
----
-
-## 🚀 Features
-
-* ✅ **Dark theme** powered by CSS variables (design tokens)
-* ✅ **Accessible modal**
-
-  * Close with `Esc`
-  * Click outside to close
-  * Keyboard *focus trap*
-* ✅ **Styled native date picker**
-
-  * Right-aligned arrow icon
-  * Clickable indicator
-* ✅ **Custom select (picker)**
-
-  * Popup list
-  * ARIA attributes for accessibility
-* ✅ **Themed scrollbars**
-
-  * Compatible with Firefox and WebKit
-* ✅ **Consistent form fields**
-
-  * Standardized sizing
-  * Precise icon alignment
+A simple and elegant **dark-themed UI** for managing a pet shop schedule.
+This project was built as a **Rocketseat challenge**, focusing on clean UI, accessibility, modular CSS, and a modern front-end workflow using **Webpack**.
 
 ---
 
-## 🛠️ Technologies Used
+## 📸 Preview
 
-| Technology   | Purpose                                          |
-| ------------ | ------------------------------------------------ |
-| HTML5        | Semantic markup and structure                    |
-| CSS3         | Styling, design tokens, and modular architecture |
-| JavaScript   | Modal state management and picker behavior       |
-| Google Fonts | *Inter* typeface (optional)                      |
+![Project Screenshot](./Screenshot.png)
+
+---
+
+## 🚀 Technologies
+
+* HTML5
+* CSS3 (modular architecture)
+* JavaScript (ES6+)
+* Webpack 5
+* Babel
+* JSON Server (mock API)
 
 ---
 
 ## 📂 Project Structure
 
-```text
-project-root/
-├── index.html
-└── src/
-    ├── assets/
-    │   └── icon/
-    │       ├── arrow.svg
-    │       └── ... other SVG icons
-    ├── script/
-    │   └── script.js
-    └── style/
-        ├── index.css          # Imports all modules below
-        ├── core/
-        │   ├── base.css       # Reset and global styles
-        │   ├── scrollbars.css # Custom scrollbars
-        │   └── tokens.css     # Design tokens (colors, spacing, etc.)
-        ├── layout/
-        │   ├── brand.css      # Visual identity
-        │   └── content.css    # Layout structure
-        └── components/
-            ├── blocks.css
-            ├── buttons.css
-            ├── date-picker.css
-            ├── form.css
-            ├── modal.css
-            └── picker.css
+```
+assets/
+└── icon/              # Icons and images
+
+dist/                 # Production build (generated)
+
+src/
+├── style/
+│   ├── core/
+│   ├── layout/
+│   ├── components/
+│   ├── responsive/
+│   └── index.css
+├── script/
+└── main.js
+
+index.html
+server.json
+webpack.config.js
+package.json
 ```
 
 ---
 
-## ♿ Accessibility
+## ⚙️ Requirements
 
-This project was developed with accessibility in mind:
+Before running the project, make sure you have installed:
 
-* Full keyboard navigation
-* Proper use of **ARIA attributes**
-* Visible focus states
-* Predictable behavior for interactive components
+* **Node.js** (version 18 or higher recommended)
+* **npm** (comes with Node.js)
 
 ---
 
-## 🤝 Contributing
+## 📦 Installing Dependencies
 
-Contributions, issues, and feature requests are welcome!
+Clone the repository and install the dependencies:
 
-Feel free to check the repository **Issues** tab to report bugs or suggest improvements.
-
-### How to Contribute
-
-1. Fork this repository
-2. Create a new branch (`git checkout -b feature/YourFeature`)
-3. Commit your changes (`git commit -m 'Add new feature'`)
-4. Push to the branch (`git push origin feature/YourFeature`)
-5. Open a Pull Request
+```bash
+git clone https://github.com/Mauricioibzde/Pet-Store-Scheduling.git
+cd Pet-Store-Scheduling
+npm install
+```
 
 ---
 
-## ⭐ Support the Project
+## ▶️ Running the Project
 
-If you like this project, consider giving it a **⭐ star on GitHub** — it really helps! 🙌
+### Development mode (Webpack Dev Server)
+
+```bash
+npm run dev
+```
+
+The project will be available at:
+
+```
+http://localhost:3000
+```
+
+---
+
+### Mock API (JSON Server)
+
+To start only the fake backend:
+
+```bash
+npm run server
+```
+
+Runs on:
+
+```
+http://localhost:3333
+```
+
+---
+
+### Frontend + Backend together
+
+```bash
+npm start
+```
+
+This command runs **Webpack Dev Server** and **JSON Server** in parallel.
+
+---
+
+## 🏗️ Production Build
+
+To generate an optimized production build:
+
+```bash
+npm run build
+```
+
+The output files will be generated in the `dist/` folder.
+
+---
+
+## 🎯 Features
+
+* Custom date picker
+* Schedule organized by time periods (Morning, Afternoon, Evening)
+* Modal form for new appointments
+* Modular and scalable CSS structure
+* Dark theme UI
+* Responsive layout
+
+---
+
+## 🧠 Learning Goals
+
+This project focuses on:
+
+* Front-end architecture
+* Webpack configuration from scratch
+* Modular CSS organization
+* Accessibility and UI consistency
+* Preparing a portfolio-ready project
 
 ---
 
 ## 📄 License
 
-This project is free to use for educational and portfolio purposes.
+This project is licensed under the **ISC License**.
+
+---
+
+👨‍💻 Developed as part of a **Rocketseat challenge**

@@ -1,9 +1,0 @@
-/* Responsivo (layout) */
-@media (max-width: 520px){
-  .toolbar{ gap: 16px; }
-  .titles h1{ font-size: 28px; }
-  .brand-chip {
-    position: relative!important;
-    
-  }
-}
