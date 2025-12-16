@@ -1,0 +1,30 @@
+/* =========================
+   Design tokens
+   ========================= */
+:root{
+  /* Cores */
+  --bg: #0f1117;
+  --panel: #121420;
+  --card: #171926;
+  --border: #262a36;
+  --text: #e6e7ee;
+  --muted: #9aa0ad;
+  --accent: #a78bfa;
+  --accent-strong: #8b5cf6;
+
+  /* Campos */
+  --field-height: 44px;
+  --field-radius: 10px;
+  --field-px: 12px;
+  --icon-left-space: 44px;
+
+  /* Ícones (arrows) à direita */
+  --arrow-size: 16px;
+  --arrow-gap: 8px;
+
+  /* Scrollbars */
+  --scrollbar-size: 10px;
+  --scrollbar-track: var(--panel);
+  --scrollbar-thumb: var(--border);
+  --scrollbar-thumb-hover: var(--text);
+}

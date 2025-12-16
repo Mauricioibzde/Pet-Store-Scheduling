@@ -1,0 +1,127 @@
+/* =========================
+   Select (nativo) e Custom select com arrow
+   ========================= */
+.picker{
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding-right: calc(var(--arrow-size) + var(--arrow-gap));
+  background: transparent;
+  color: var(--text);
+}
+.picker::after{
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--arrow-size);
+  height: var(--arrow-size);
+  background: url("../../assets/icon/arrow.svg") center/contain no-repeat;
+  pointer-events: none;
+}
+.picker select{
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  background-image: none !important;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font: inherit;
+  padding: 0;
+  line-height: 1.2;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.picker select::-ms-expand{ display: none; }
+.picker select option{ background: var(--panel); color: var(--text); }
+
+/* Listbox (multiple/size>1) */
+.picker select[multiple],
+.picker select[size]:not([size="1"]){
+  height: auto;
+  min-height: 140px;
+  padding: 6px 8px;
+  line-height: 1.2;
+  overflow: auto;
+  border-radius: var(--field-radius);
+}
+.picker:has(select[multiple]),
+.picker:has(select[size]:not([size="1"])){
+  padding-right: 0;
+}
+.picker:has(select[multiple])::after,
+.picker:has(select[size]:not([size="1"]))::after{ display: none; }
+
+/* Custom select */
+.picker--custom select{
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+  opacity: 0; pointer-events: none;
+}
+.picker-trigger{
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  background: transparent;
+  color: var(--text);
+  border: none;
+  font: inherit;
+  line-height: 1.2;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Popup custom */
+.picker-menu{
+  position: absolute;
+  z-index: 1000;
+  top: -11rem;
+  right: -13px!important;
+  margin-top: 6px;
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  max-height: 215px!important;
+  overflow: auto;
+  padding: 6px 0;
+  display: none;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) var(--panel);
+}
+.picker.open .picker-menu{ display: block; }
+.picker-menu::-webkit-scrollbar{ width: 10px; }
+.picker-menu::-webkit-scrollbar-track{ background: var(--panel); border-radius: 999px; }
+.picker-menu::-webkit-scrollbar-thumb{
+  background: var(--border);
+  border: 2px solid var(--panel);
+  border-radius: 999px;
+}
+.picker-menu::-webkit-scrollbar-thumb:hover{ background: var(--text); }
+.picker-menu li{
+  list-style: none;
+  padding: 8px 1rem;
+  cursor: pointer;
+}
+.picker-menu li[aria-selected="true"]{
+  background: color-mix(in srgb, var(--text) 12%, var(--panel));
+}
+.picker-menu li:hover{
+  background: color-mix(in srgb, var(--text) 18%, var(--panel));
+}
+
+/* Segurança: evitar arrow extra se alguém colocar .picker no .control */
+.control.picker::after{ display: none !important; }
