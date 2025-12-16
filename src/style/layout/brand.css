@@ -2,7 +2,7 @@
    Marca (brand)
    ========================= */
 .brand-chip{
-  position: fixed;
+  position: relative;
   top: -2px;
   left: -4px;
   display: inline-flex;
@@ -13,6 +13,7 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   color: #dde0f5;
+  z-index: 10000;
 }
 .brand-chip .brand-icon{
   width: 28px; height: 28px;
