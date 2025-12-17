@@ -1,13 +1,11 @@
-<!doctype html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mundo Pet — Agenda</title>
- <link rel="stylesheet" href="./src/style/index.css">
+  <title>Pet World — Schedule</title>
+  <link rel="stylesheet" href="./src/style/index.css">
 
-
-  <!-- Fonte (opcional) -->
+  <!-- Font (optional) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,41 +13,39 @@
 <body>
   <div class="brand-chip">
     <span class="brand-icon">
-      <img src="assets/icon/dog-duotone.svg" alt="Ícone de cachorro">
+      <img src="assets/icon/dog-duotone.svg" alt="Dog icon">
     </span>
-    <span class="brand-text">MUNDO PET</span>
+    <span class="brand-text">PET WORLD</span>
   </div>
 
   <main class="content">
     <div class="toolbar">
       <div class="titles">
-        <h1>Sua agenda</h1>
-        <p>Aqui você pode ver todos os clientes e serviços agendados para hoje.</p>
+        <h1>Your schedule</h1>
+        <p>Here you can see all clients and services scheduled for today.</p>
       </div>
 
       <label class="date-picker">
         <span class="cal-icon">
-          <img src="assets/icon/Calendar-Minimalistic--Streamline-Solar.svg" alt="Calendário">
+          <img src="assets/icon/Calendar-Minimalistic--Streamline-Solar.svg" alt="Calendar">
         </span>
         <input class="date" type="date" value="2024-10-01" />
       </label>
     </div>
 
-    <!-- Blocos de horários -->
+    <!-- Time blocks -->
     <section class="block">
       <header class="block-header">
         <div class="block-title">
           <span class="dot">
-            <img src="assets/icon/Sun-Fog--Streamline-Solar.svg" alt="Manhã">
+            <img src="assets/icon/Sun-Fog--Streamline-Solar.svg" alt="Morning">
           </span>
-          <strong>Manhã</strong>
+          <strong>Morning</strong>
         </div>
-        <div class="range">09h–12h</div>
+        <div class="range">9am–12pm</div>
       </header>
       <div class="rows morning">
-      
-  
-      
+        
       </div>
     </section>
 
@@ -57,14 +53,14 @@
       <header class="block-header">
         <div class="block-title">
           <span class="dot">
-            <img src="assets/icon/Cloud-Sun-4--Streamline-Solar.svg" alt="Tarde">
+            <img src="assets/icon/Cloud-Sun-4--Streamline-Solar.svg" alt="Afternoon">
           </span>
-          <strong>Tarde</strong>
+          <strong>Afternoon</strong>
         </div>
-        <div class="range">13h–18h</div>
+        <div class="range">1pm–6pm</div>
       </header>
       <div class="rows afternoon">
-        <!-- ... outros agendamentos da tarde ... -->
+        <!-- ... other afternoon appointments ... -->
       </div>
     </section>
 
@@ -72,89 +68,89 @@
       <header class="block-header">
         <div class="block-title">
           <span class="dot">
-            <img src="assets/icon/Moon-Stars--Streamline-Solar.svg" alt="Noite">
+            <img src="assets/icon/Moon-Stars--Streamline-Solar.svg" alt="Evening">
           </span>
-          <strong>Noite</strong>
+          <strong>Evening</strong>
         </div>
-        <div class="range">19h–21h</div>
+        <div class="range">7pm–9pm</div>
       </header>
       <div class="rows night">
-        <!-- ... agendamentos da noite ... -->
+        <!-- ... evening appointments ... -->
       </div>
     </section>
 
-    <button id="open-appointment" class="cta">NOVO AGENDAMENTO</button>
+    <button id="open-appointment" class="cta">NEW APPOINTMENT</button>
   </main>
 
   <!-- Modal -->
   <div id="appointment-modal" class="modal" aria-hidden="true">
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="appointment-title">
       <div class="modal-header">
-        <h2 id="appointment-title">Novo agendamento</h2>
-        <button class="modal-close" aria-label="Fechar"></button>
+        <h2 id="appointment-title">New appointment</h2>
+        <button class="modal-close" aria-label="Close"></button>
       </div>
 
       <form class="form-card">
         <div class="field">
-          <label class="label" for="tutor">Nome do tutor</label>
+          <label class="label" for="tutor">Owner's name</label>
           <div class="control icon-left">
             <span class="leading-icon">
-              <img src="assets/icon/User.svg" alt="Usuário">
+              <img src="assets/icon/User.svg" alt="User">
             </span>
             <input id="tutor" name="tutor" type="text" placeholder="Helena Souza" />
           </div>
         </div>
 
         <div class="field">
-          <label class="label" for="pet">Nome do pet</label>
+          <label class="label" for="pet">Pet's name</label>
           <div class="control icon-left">
             <span class="leading-icon">
-              <img src="assets/icon/Pet-Paw--Streamline-Core.svg" alt="Pata de pet">
+              <img src="assets/icon/Pet-Paw--Streamline-Core.svg" alt="Pet paw">
             </span>
             <input id="pet" name="pet" type="text" placeholder="Cheddar" />
           </div>
         </div>
 
         <div class="field">
-          <label class="label" for="fone">Telefone</label>
+          <label class="label" for="fone">Phone</label>
           <div class="control icon-left">
             <span class="leading-icon">
-              <img src="assets/icon/Phone--Streamline-Solar.svg" alt="Telefone">
+              <img src="assets/icon/Phone--Streamline-Solar.svg" alt="Phone">
             </span>
             <input id="fone" name="fone" type="tel" placeholder="(00) 0 0000-0000" />
           </div>
         </div>
 
         <div class="field">
-          <label class="label" for="desc">Descrição do serviço</label>
+          <label class="label" for="desc">Service description</label>
           <div class="control text-area">
-            <textarea id="desc" name="descricao" placeholder="Banho e tosa"></textarea>
+            <textarea id="desc" name="descricao" placeholder="Bath and grooming"></textarea>
           </div>
         </div>
 
         <div class="grid-2">
           <div class="field">
-            <label class="label" for="data">Data</label>
+            <label class="label" for="data">Date</label>
             <label class="date-picker" id="date-field">
               <span class="cal-icon">
-                <img src="assets/icon/Calendar-Minimalistic--Streamline-Solar.svg" alt="Calendário">
+                <img src="assets/icon/Calendar-Minimalistic--Streamline-Solar.svg" alt="Calendar">
               </span>
               <input class="date-form" type="date" value="2024-10-01" />
             </label>
           </div>
 
           <div class="field">
-            <label class="label" for="hora">Horário</label>
+            <label class="label" for="hora">Time</label>
             <div class="control icon-left">
               <span class="leading-icon">
-                <img src="assets/icon/Clock-Circle--Streamline-Solar.svg" alt="Relógio">
+                <img src="assets/icon/Clock-Circle--Streamline-Solar.svg" alt="Clock">
               </span>
               <div class="picker picker--custom" id="picker-horario">
                 <select name="horario" id="horario">
                   <option value="08:00" selected>08:00</option>
                   <option value="09:00">09:00</option>
                   <option value="10:00">10:00</option>
-                  <!-- ... outros horários ... -->
+                  <!-- ... other times ... -->
                 </select>
                 <button type="button" class="picker-trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="horario-list">08:00</button>
                 <ul id="horario-list" class="picker-menu" role="listbox"></ul>
@@ -164,12 +160,11 @@
         </div>
 
         <div class="actions">
-          <button class="btn-primary" type="submit">AGENDAR</button>
+          <button class="btn-primary" type="submit">SCHEDULE</button>
         </div>
       </form>
     </div>
   </div>
 </body>
 <script src="./src/main.js"></script>
-<script src="src/script/script-open-menu.js"></script>
 </html>

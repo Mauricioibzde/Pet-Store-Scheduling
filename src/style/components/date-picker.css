@@ -14,6 +14,7 @@
   height: var(--field-height);
   min-height: var(--field-height);
   padding: 0 calc(var(--field-px) + var(--arrow-size) + var(--arrow-gap)) 0 var(--field-px);
+  opacity: 1;
 }
 .date-picker .cal-icon{
   width: 24px; height: 24px;
