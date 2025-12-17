@@ -165,7 +165,7 @@
 
 .custom-calendar {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 0.25rem;
   background-color: #1f1f2e;
   padding: 0.5rem;
@@ -201,11 +201,9 @@
 }
 
 .custom-calendar .calendar-filter {
-    position: absolute;
-    bottom: -100px;
-    right: 28px;
-    background-color: #6c5ce7;
-    color: #fff;
+position: absolute;
+    bottom: 12px;
+    right: 15px;
     border: none;
     border-radius: 6px;
     padding: 8px 28px;
@@ -219,7 +217,11 @@
 
 .month-year-on-the-calendary {
   background-color: #6c5ce7;
+  padding: 1rem;
   transform: translateY(-2.5rem);
-  grid-column: span 5 / 7;
+  grid-column: span 6 / 7;
   border-radius: 1rem 0 1rem 0rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

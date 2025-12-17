@@ -150,10 +150,17 @@ function createCustomCalendar(year, month, appointments) {
 
   // Botão filtrar
   const monthYear = document.createElement('div');
-  const filterBtn = document.createElement('button');
+  const filterBtn = document.createElement('input');
+  
+  filterBtn.innerText = "Apply"
+
   monthYear.classList.add("month-year-on-the-calendary")
-  filterBtn.textContent = "Filtrar";
+  const btn_select_month = document.createElement("button")
+  btn_select_month.textContent = dayjs().format("YYYY-MM-DD")
+ 
+
   filterBtn.classList.add('calendar-filter');
+
   filterBtn.addEventListener('click', () => {
     const dateValue = selectedDate.value;
     renderSchedules(dateValue); // aplica filtro
@@ -161,6 +168,7 @@ function createCustomCalendar(year, month, appointments) {
   });
   calendar.appendChild(filterBtn);
   calendar.appendChild(monthYear);
+  monthYear.appendChild(btn_select_month)
 
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
@@ -196,7 +204,9 @@ function createCustomCalendar(year, month, appointments) {
 
 
 // Mostrar calendário ao clicar no input
-selectedDate.addEventListener('click', (e) => {
+
+const btn_show_status_calendary = document.querySelector(".btn-show-status-calendary")
+btn_show_status_calendary.addEventListener('click', (e) => {
   e.stopPropagation(); // evita fechar imediatamente
 
   const [year, month,] = selectedDate.value.split('-').map(Number);
@@ -220,18 +230,7 @@ document.addEventListener('click', () => {
 
 //
 
-selectedDate.addEventListener('click', (e) => {
-  e.stopPropagation(); // evita fechar imediatamente
 
-  const [year, month] = selectedDate.value.split('-').map(Number);
-  const calendar = createCustomCalendar(year, month - 1, allSchedules);
-
-  const pickerContainer = document.querySelector('.date-picker');
-  const existing = pickerContainer.querySelector('.custom-calendar');
-  if (existing) existing.remove();
-
-  pickerContainer.appendChild(calendar);
-});
 
 // Fechar calendário se clicar fora
 document.addEventListener('click', () => {

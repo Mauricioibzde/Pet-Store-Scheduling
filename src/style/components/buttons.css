@@ -1,7 +1,7 @@
 /* =========================
    Botões (CTA e primário)
    ========================= */
-.cta , .btn-primary{
+.cta , .btn-primary, .btn-calendary-status,  .calendar-filter{
   padding: 16px 26px;
   border-radius: 10px;
   border: none;
@@ -15,7 +15,16 @@
     0 24px 80px 0 #8b5cf680,
     0 8px 24px #00000066;
 }
-.cta:hover{ filter: brightness(1.05); }
+
+.btn-calendary-status {
+  padding: 8px 14px;
+}
+
+.custom-calendar {
+  position: relative;
+}
+
+.cta:hover, .btn-calendary-status:hover, .calendar-filter:hover{ filter: brightness(1.05); }
 
 /* Responsivo (.cta) */
 @media (max-width: 840px){
