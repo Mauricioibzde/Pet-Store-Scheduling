@@ -1,20 +1,43 @@
+/* ==================== MODAL & PICKER ==================== */
+
+/**
+ * Inicializa o modal e os pickers customizados
+ */
 export function initModalAndPickers() {
-  const openBtn = document.getElementById('open-appointment');
-  const modal = document.getElementById('appointment-modal');
+  const openBtn = document.getElementById("open-appointment");
+  const modal = document.getElementById("appointment-modal");
 
   if (!openBtn || !modal) return;
 
-  const closeBtn = modal.querySelector('.modal-close');
+  const closeBtn = modal.querySelector(".modal-close");
 
+  // Inicializa eventos do modal
+  setupModalEvents(openBtn, closeBtn, modal);
+
+  // Inicializa os pickers customizados
+  initCustomPickers();
+}
+
+/* ==================== MODAL ==================== */
+
+/**
+ * Configura todos os eventos do modal
+ * @param {HTMLElement} openBtn - botão de abrir modal
+ * @param {HTMLElement} closeBtn - botão de fechar modal
+ * @param {HTMLElement} modal - container do modal
+ */
+function setupModalEvents(openBtn, closeBtn, modal) {
   const focusableSelector = [
-    'a[href]', 'button:not([disabled])', 'input:not([disabled])',
-    'select:not([disabled])', 'textarea:not([disabled])',
-    '[tabindex]:not([tabindex="-1"])'
-  ].join(',');
+    "a[href]",
+    "button:not([disabled])",
+    "input:not([disabled])",
+    "select:not([disabled])",
+    "textarea:not([disabled])",
+    '[tabindex]:not([tabindex="-1"])',
+  ].join(",");
 
-  function trapFocus(e) {
-    if (!modal.classList.contains('is-open')) return;
-    if (e.key !== 'Tab') return;
+  const trapFocus = (e) => {
+    if (!modal.classList.contains("is-open") || e.key !== "Tab") return;
 
     const focusables = [...modal.querySelectorAll(focusableSelector)];
     if (!focusables.length) return;
@@ -29,67 +52,118 @@ export function initModalAndPickers() {
       first.focus();
       e.preventDefault();
     }
-  }
+  };
 
-  function openModal() {
-    modal.classList.add('is-open');
-    document.body.classList.add('modal-open');
+  const onEsc = (e) => {
+    if (e.key === "Escape") closeModal();
+  };
 
-    modal.querySelector('#tutor')?.focus();
+  const openModal = () => {
+    modal.classList.add("is-open");
+    document.body.classList.add("modal-open");
 
-    document.addEventListener('keydown', onEsc);
-    document.addEventListener('keydown', trapFocus);
-  }
+    // Foca no primeiro input relevante, se existir
+    modal.querySelector("#tutor")?.focus();
 
-  function closeModal() {
-    modal.classList.remove('is-open');
-    document.body.classList.remove('modal-open');
-    document.removeEventListener('keydown', onEsc);
-    document.removeEventListener('keydown', trapFocus);
+    document.addEventListener("keydown", onEsc);
+    document.addEventListener("keydown", trapFocus);
+  };
+
+  const closeModal = () => {
+    modal.classList.remove("is-open");
+    document.body.classList.remove("modal-open");
+
+    document.removeEventListener("keydown", onEsc);
+    document.removeEventListener("keydown", trapFocus);
+
     openBtn.focus();
-  }
+  };
 
-  function onEsc(e) {
-    if (e.key === 'Escape') closeModal();
-  }
+  // Eventos do modal
+  openBtn.addEventListener("click", openModal);
+  closeBtn?.addEventListener("click", closeModal);
 
-  openBtn.addEventListener('click', openModal);
-  closeBtn?.addEventListener('click', closeModal);
-
-  modal.addEventListener('click', (e) => {
+  // Fecha ao clicar fora do conteúdo do modal
+  modal.addEventListener("click", (e) => {
     if (e.target === modal) closeModal();
   });
-
-  initCustomPickers();
 }
 
-/* ---------- picker ---------- */
+/* ==================== PICKERS ==================== */
+
+/**
+ * Inicializa todos os pickers customizados no documento
+ */
 export function initCustomPickers() {
-  document.querySelectorAll('.picker.picker--custom').forEach(picker => {
-    const select = picker.querySelector('select');
-    const btn = picker.querySelector('.picker-trigger');
-    const list = picker.querySelector('.picker-menu');
+  const pickers = document.querySelectorAll(".picker.picker--custom");
+
+  pickers.forEach((picker) => {
+    const select = picker.querySelector("select");
+    const btn = picker.querySelector(".picker-trigger");
+    const list = picker.querySelector(".picker-menu");
 
     if (!select || !btn || !list) return;
 
-    list.innerHTML = '';
+    buildPickerOptions(picker, select, btn, list);
+    setupPickerEvents(picker, select, btn, list);
+  });
+}
 
-    [...select.options].forEach(opt => {
-      const li = document.createElement('li');
-      li.textContent = opt.text;
-      li.dataset.value = opt.value;
+/**
+ * Cria os itens da lista do picker com base nas opções do select
+ */
+function buildPickerOptions(picker, select, btn, list) {
+  list.innerHTML = "";
 
-      if (opt.selected) li.setAttribute('aria-selected', 'true');
+  [...select.options].forEach((opt) => {
+    const li = document.createElement("li");
+    li.textContent = opt.text;
+    li.dataset.value = opt.value;
 
-      li.addEventListener('click', () => {
-        select.value = opt.value;
-        btn.textContent = opt.text;
+    if (opt.selected) li.setAttribute("aria-selected", "true");
 
-        picker.classList.remove('open');
-        btn.setAttribute('aria-expanded', 'false');
-      });
+    li.addEventListener("click", () => {
+      select.value = opt.value;
+      btn.textContent = opt.text;
 
-      list.appendChild(li);
+      list.querySelectorAll("[aria-selected]").forEach((el) =>
+        el.removeAttribute("aria-selected")
+      );
+      li.setAttribute("aria-selected", "true");
+
+      picker.classList.remove("open");
+      btn.setAttribute("aria-expanded", "false");
     });
+
+    list.appendChild(li);
+  });
+
+  // Define o texto inicial do botão
+  btn.textContent = select.options[select.selectedIndex]?.text || "Select";
+}
+
+/**
+ * Configura eventos de abrir/fechar o picker e acessibilidade
+ */
+function setupPickerEvents(picker, select, btn, list) {
+  btn.addEventListener("click", () => {
+    const isOpen = picker.classList.toggle("open");
+    btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  });
+
+  // Fecha picker ao clicar fora
+  document.addEventListener("click", (e) => {
+    if (!picker.contains(e.target)) {
+      picker.classList.remove("open");
+      btn.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  // Acessibilidade via teclado
+  picker.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      btn.click();
+    }
   });
 }

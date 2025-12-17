@@ -31,7 +31,7 @@
         <span class="cal-icon">
           <img src="assets/icon/Calendar-Minimalistic--Streamline-Solar.svg" alt="Calendário">
         </span>
-        <input type="date" value="2024-10-01" />
+        <input class="date" type="date" value="2024-10-01" />
       </label>
     </div>
 
@@ -46,13 +46,10 @@
         </div>
         <div class="range">09h–12h</div>
       </header>
-      <div class="rows">
-        <div class="row">
-          <div class="col time">09:00</div>
-          <div class="col who"><b>Thor</b> <span class="muted">/ Fernanda Costa</span></div>
-          <div class="col service">Vacinação</div>
-          <div class="col action"><a href="#" class="link">Remover agendamento</a></div>
-        </div>
+      <div class="rows morning">
+      
+  
+      
       </div>
     </section>
 
@@ -66,7 +63,7 @@
         </div>
         <div class="range">13h–18h</div>
       </header>
-      <div class="rows">
+      <div class="rows afternoon">
         <!-- ... outros agendamentos da tarde ... -->
       </div>
     </section>
@@ -81,7 +78,7 @@
         </div>
         <div class="range">19h–21h</div>
       </header>
-      <div class="rows">
+      <div class="rows night">
         <!-- ... agendamentos da noite ... -->
       </div>
     </section>
@@ -97,7 +94,7 @@
         <button class="modal-close" aria-label="Fechar"></button>
       </div>
 
-      <form class="form-card" action="#" method="post" autocomplete="on">
+      <form class="form-card">
         <div class="field">
           <label class="label" for="tutor">Nome do tutor</label>
           <div class="control icon-left">
@@ -142,7 +139,7 @@
               <span class="cal-icon">
                 <img src="assets/icon/Calendar-Minimalistic--Streamline-Solar.svg" alt="Calendário">
               </span>
-              <input type="date" id="data" name="data" value="2024-10-01" />
+              <input class="date-form" type="date" value="2024-10-01" />
             </label>
           </div>
 
