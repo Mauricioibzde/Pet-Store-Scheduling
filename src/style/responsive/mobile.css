@@ -4,6 +4,16 @@
   .titles h1{ font-size: 28px; }
   .brand-chip {
     position: relative!important;
+
     
+    
+  }
+
+  .custom-calendar {
+    width: 90%;
+  }
+
+  .Calendar {
+   justify-content: center;
   }
 }

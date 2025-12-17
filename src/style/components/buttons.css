@@ -18,6 +18,7 @@
 
 .btn-calendary-status {
   padding: 8px 14px;
+  transform: translate(-3px, 0px);
 }
 
 .custom-calendar {

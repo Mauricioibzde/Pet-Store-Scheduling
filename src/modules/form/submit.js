@@ -4,6 +4,7 @@ import { hour } from "./load-schedules"
 // ======================
 // ELEMENTOS DO DOM
 // ======================
+
 const form = document.querySelector("form")
 const tutorInput = document.getElementById("tutor")
 const petInput = document.getElementById("pet")
@@ -12,8 +13,10 @@ const descInput = document.getElementById("desc")
 const dateInput = document.querySelector(".date-form")
 const hourInput = document.getElementById("horario")
 const selectedDateInput = document.querySelector(".date")
+
 const calendarSection = document.querySelector(".Calendar")
-const showCalendarBtn = document.querySelector(".btn-show-status-calendary")
+const overlay = document.querySelector(".calendar-overlay")
+const openCalendarBtn = document.querySelector(".btn-show-status-calendary")
 
 // ======================
 // HORÁRIOS
@@ -81,10 +84,15 @@ function renderSchedules(date) {
         <div class="row">
           <div class="col time">${schedules.hour}</div>
           <div class="col date">${schedules.date}</div>
-          <div class="col who"><b>${schedules.pet}</b> <span class="muted">/ ${schedules.tutor}</span></div>
+          <div class="col who">
+            <b>${schedules.pet}</b>
+            <span class="muted">/ ${schedules.tutor}</span>
+          </div>
           <div class="col phone">${schedules.phone}</div>
           <div class="col service">${schedules.description}</div>
-          <div class="col action"><a href="#" class="link remove">Remove appointment</a></div>
+          <div class="col action">
+            <a href="#" class="link remove">Remove appointment</a>
+          </div>
         </div>
       `
       block.appendChild(li)
@@ -96,8 +104,16 @@ function renderSchedules(date) {
 // ======================
 form.addEventListener("submit", e => {
   e.preventDefault()
-  if (!tutorInput.value || !petInput.value || !phoneInput.value || !descInput.value || !dateInput.value || !hourInput.value) {
-    alert("Please fill in all fields before submitting the appointment.")
+
+  if (
+    !tutorInput.value ||
+    !petInput.value ||
+    !phoneInput.value ||
+    !descInput.value ||
+    !dateInput.value ||
+    !hourInput.value
+  ) {
+    alert("Please fill in all fields.")
     return
   }
 
@@ -122,96 +138,101 @@ form.addEventListener("submit", e => {
 document.addEventListener("click", e => {
   if (!e.target.classList.contains("remove")) return
   e.preventDefault()
+
   const li = e.target.closest("li")
   const time = li.querySelector(".time").textContent
   const date = li.querySelector(".date").textContent
-  allSchedules = allSchedules.filter(s => !(s.hour === time && s.date === date))
+
+  allSchedules = allSchedules.filter(
+    s => !(s.hour === time && s.date === date)
+  )
+
   li.remove()
 })
 
 // ======================
-// CRIAR CALENDÁRIO DINÂMICO
+// CALENDÁRIO
 // ======================
 function createCustomCalendar(year, month, appointments) {
   const calendar = document.createElement("div")
   calendar.classList.add("custom-calendar")
+
+  // 🚫 Impede clique vazar
   calendar.addEventListener("click", e => e.stopPropagation())
 
   let currentYear = year
   let currentMonth = month
 
-  // Header com label e botões
-  const monthYear = document.createElement("div")
-  monthYear.classList.add("month-year-on-the-calendary")
+  const header = document.createElement("div")
+  header.classList.add("month-year-on-the-calendary")
 
-  const btnPrev = document.createElement("button")
-  btnPrev.classList.add("btn-next-month-lef")
-  btnPrev.innerHTML = `<img src="./assets/icon/arrow.svg" alt="Prev">`
+  const prev = document.createElement("button")
+  prev.classList.add("btn-next-month-lef")
+  prev.innerHTML = `
+   <img src="./assets/icon/arrow.svg" alt="">
+  `
 
-  const monthLabel = document.createElement("p")
-  monthLabel.classList.add("month-label")
-  monthLabel.textContent = dayjs(`${currentYear}-${currentMonth + 1}-01`).format("MMMM YYYY")
+  const label = document.createElement("p")
+  label.textContent = dayjs(`${year}-${month + 1}-01`).format("MMMM YYYY")
 
-  const btnNext = document.createElement("button")
-  btnNext.classList.add("btn-next-month-right")
-  btnNext.innerHTML = `<img src="./assets/icon/arrow.svg" alt="Next">`
+  const next = document.createElement("button")
+  next.classList.add("btn-next-month-right")
+  next.innerHTML = `
+     <img src="./assets/icon/arrow.svg" alt="">
+  `
 
-  monthYear.append(btnPrev, monthLabel, btnNext)
-  calendar.appendChild(monthYear)
-
-  const filterBtn = document.createElement("button")
-  filterBtn.classList.add("calendar-filter")
-  filterBtn.innerHTML = ` <img class="close-img" src="./assets/icon/close.png" alt="Next">`
-  filterBtn.addEventListener("click", () => {
-    renderSchedules(selectedDateInput.value)
-  })
-  calendar.appendChild(filterBtn)
+  header.append(prev, label, next)
+  calendar.appendChild(header)
 
   function renderDays() {
     calendar.querySelectorAll(".day").forEach(d => d.remove())
-    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate()
-    for (let day = 1; day <= daysInMonth; day++) {
+
+    const days = new Date(currentYear, currentMonth + 1, 0).getDate()
+
+    for (let d = 1; d <= days; d++) {
       const dayEl = document.createElement("div")
       dayEl.classList.add("day")
-      dayEl.textContent = day
+      dayEl.textContent = d
 
-      const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2,"0")}-${String(day).padStart(2,"0")}`
+      const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`
+
       const count = appointments.filter(a => a.date === dateStr).length
-      if (count > 0) {
-        const span = document.createElement("span")
-        span.classList.add("appointment-count")
-        span.textContent = count
-        dayEl.appendChild(span)
+      if (count) {
+        const badge = document.createElement("span")
+        badge.classList.add("appointment-count")
+        badge.textContent = count
+        dayEl.appendChild(badge)
       }
 
       dayEl.addEventListener("click", () => {
         selectedDateInput.value = dateStr
         renderSchedules(dateStr)
+        closeCalendar()
       })
 
       calendar.appendChild(dayEl)
     }
   }
 
-  btnPrev.addEventListener("click", () => {
+  prev.onclick = () => {
     currentMonth--
     if (currentMonth < 0) {
       currentMonth = 11
       currentYear--
     }
-    monthLabel.textContent = dayjs(`${currentYear}-${currentMonth + 1}-01`).format("MMMM YYYY")
+    label.textContent = dayjs(`${currentYear}-${currentMonth + 1}-01`).format("MMMM YYYY")
     renderDays()
-  })
+  }
 
-  btnNext.addEventListener("click", () => {
+  next.onclick = () => {
     currentMonth++
     if (currentMonth > 11) {
       currentMonth = 0
       currentYear++
     }
-    monthLabel.textContent = dayjs(`${currentYear}-${currentMonth + 1}-01`).format("MMMM YYYY")
+    label.textContent = dayjs(`${currentYear}-${currentMonth + 1}-01`).format("MMMM YYYY")
     renderDays()
-  })
+  }
 
   renderDays()
   return calendar
@@ -220,14 +241,23 @@ function createCustomCalendar(year, month, appointments) {
 // ======================
 // ABRIR / FECHAR CALENDÁRIO
 // ======================
-showCalendarBtn.addEventListener("click", e => {
-  e.stopPropagation()
-  calendarSection.querySelector(".custom-calendar")?.remove()
-  const [year, month] = selectedDateInput.value.split("-").map(Number)
-  const calendar = createCustomCalendar(year, month - 1, allSchedules)
+function openCalendar() {
+  overlay.classList.add("active")
+  calendarSection.innerHTML = ""
+
+  const [y, m] = selectedDateInput.value.split("-").map(Number)
+  const calendar = createCustomCalendar(y, m - 1, allSchedules)
   calendarSection.appendChild(calendar)
+}
+
+function closeCalendar() {
+  overlay.classList.remove("active")
+  calendarSection.innerHTML = ""
+}
+
+openCalendarBtn.addEventListener("click", e => {
+  e.stopPropagation()
+  openCalendar()
 })
 
-document.addEventListener("click", () => {
-  document.querySelector(".custom-calendar")?.remove()
-})
+overlay.addEventListener("click", closeCalendar)
