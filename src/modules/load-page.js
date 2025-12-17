@@ -7,3 +7,10 @@ initModalAndPickers();
 schedulesDay()
   
 });
+
+document.addEventListener("click", () => {
+  const pickerContainer = document.querySelector(".date-picker")
+  const calendar = pickerContainer.querySelector(".custom-calendar")
+  if (calendar) calendar.remove()
+})
+
