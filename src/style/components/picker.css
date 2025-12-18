@@ -366,9 +366,10 @@ position: absolute;
   margin-bottom: 5rem;
   display: flex;
   justify-content: end;
+  z-index: 20000000;
 }
 .custom-calendar {
-  width: 20rem;
+  width: 25rem;
   position: absolute;
   z-index: 1;
   
@@ -413,4 +414,26 @@ body.calendar-open .content {
 }
 
 /**/
+
+.date-picker input.date-form {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  pointer-events: none;
+  display: none;
+ 
+}
+
+.date-picker .date-text {
+  display: inline-block;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 500;
+}
+
 

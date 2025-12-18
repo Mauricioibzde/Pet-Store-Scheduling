@@ -21,11 +21,12 @@
   </div>
 
   <main class="content">
-  <div class="calendar-overlay">
+             <div class="calendar-overlay">
   </div>
             <div class="Calendar">
 
   </div>
+ 
 
     <div class="toolbar">
       <div class="titles">
@@ -33,16 +34,25 @@
         <p>Here you can see all clients and services scheduled for today.</p>
       </div>
 
-      <div class="btn-show-status-calendary">
-        <button class="btn-calendary-status">Calendar</button>
-      </div>
+ 
 
-      <label class="date-picker">
-        <span class="cal-icon">
-          <img src="assets/icon/Calendar-Minimalistic--Streamline-Solar.svg" alt="Calendar">
-        </span>
-        <input class="date" type="date" value="2024-10-01" />
-      </label>
+    <label class="date-picker" id="date-field">
+  <span class="cal-icon">
+    <img src="assets/icon/Calendar-Minimalistic--Streamline-Solar.svg" alt="Calendar">
+  </span>
+  <span class="date-text">2024-10-01</span> <!-- exibe a data para o usuário -->
+  <input class="date-form" type="date" value="2024-10-01" /> <!-- input real escondido -->
+</label>
+
+
+
+      
+
+      
+ 
+ 
+
+
     </div>
 
  
@@ -96,9 +106,8 @@
     </section>
 
     <button id="open-appointment" class="cta">NEW APPOINTMENT</button>
-  </main>
 
-  <!-- Modal -->
+     <!-- Modal -->
   <div id="appointment-modal" class="modal" aria-hidden="true">
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="appointment-title">
       <div class="modal-header">
@@ -107,6 +116,7 @@
       </div>
 
       <form class="form-card">
+
         <div class="field">
           <label class="label" for="tutor">Owner's name</label>
           <div class="control icon-left">
@@ -148,11 +158,12 @@
           <div class="field">
             <label class="label" for="data">Date</label>
             <label class="date-picker" id="date-field">
-              <span class="cal-icon">
-                <img src="assets/icon/Calendar-Minimalistic--Streamline-Solar.svg" alt="Calendar">
-              </span>
-              <input class="date-form" type="date" value="2024-10-01" />
-            </label>
+  <span class="cal-icon">
+    <img src="assets/icon/Calendar-Minimalistic--Streamline-Solar.svg" alt="Calendar">
+  </span>
+  <span class="date-text">08/12/2025</span> <!-- exibe a data para o usuário -->
+  <input class="date-form" type="date" value="2024-10-01"> <!-- input real escondido -->
+</label>
           </div>
 
           <div class="field">
@@ -182,6 +193,9 @@
       </form>
     </div>
   </div>
+  </main>
+
+ 
 
 
 

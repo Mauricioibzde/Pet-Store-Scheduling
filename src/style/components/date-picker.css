@@ -40,6 +40,7 @@
   position: absolute;
   inset-inline-end: var(--field-px);
   top: 50%;
+  right: 15px;
   transform: translateY(-50%);
   width: var(--arrow-size);
   height: var(--arrow-size);
