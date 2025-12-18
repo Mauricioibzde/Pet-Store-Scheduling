@@ -2,7 +2,6 @@
   "name": "projeto-desafio-rocket-seat",
   "version": "1.0.0",
   "description": "A simple and elegant dark-themed UI for Pet Shop scheduling. Static project (HTML + CSS + JavaScript) with consistent design, accessibility, and modular organization.",
-  "main": "src/main.js",
   "scripts": {
     "server": "json-server --watch server.json --port 3333",
     "build": "webpack --mode=production",

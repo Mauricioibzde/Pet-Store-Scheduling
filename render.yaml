@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: pet-store-scheduling
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npx json-server --watch server.json --port 3333
+    staticPublishPath: ./dist
+    envVars:
+      - key: NODE_ENV
+        value: production
