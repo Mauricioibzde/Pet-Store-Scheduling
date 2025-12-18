@@ -59,7 +59,6 @@ body.modal-open{ overflow: hidden; }
 @media (max-width: 520px){
   .modal { 
 
-    display: block!important;
     overflow: auto;
  }
 }

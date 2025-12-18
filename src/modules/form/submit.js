@@ -33,13 +33,15 @@ hour.forEach(h => {
 // DATA ATUAL
 // ======================
 const today = dayjs().format("YYYY-MM-DD");
-dateInputs.forEach(input => input.value = today);
-dateTexts.forEach(span => span.textContent = dayjs(today).format("DD/MM/YYYY"));
 
 // ======================
 // AGENDAMENTOS
 // ======================
-let allSchedules = [];
+let allSchedules = [
+  // Exemplo de agendamentos já existentes
+  { tutor: "Helena", pet: "Cheddar", phone: "(55) 45454 -5478", description: "Bath", date: today, hour: "09:00" },
+  { tutor: "Lucas", pet: "Milo", phone: "(55) 98524 -5808", description: "Grooming", date: today, hour: "14:00" }
+];
 
 function getTimeBlock(hour) {
   const h = parseInt(hour.split(":")[0]);
@@ -68,7 +70,7 @@ phoneInput.addEventListener("input", e => {
 // ======================
 // RENDERIZAÇÃO DE AGENDAMENTOS
 // ======================
-function renderSchedules(date) {
+function renderSchedules(date = today) {
   document.querySelector(".morning").innerHTML = "";
   document.querySelector(".afternoon").innerHTML = "";
   document.querySelector(".night").innerHTML = "";
@@ -95,6 +97,10 @@ function renderSchedules(date) {
       `;
       block.appendChild(li);
     });
+
+  // Atualiza todos os inputs e spans de data
+  dateInputs.forEach(input => input.value = date);
+  dateTexts.forEach(span => span.textContent = dayjs(date).format("DD/MM/YYYY"));
 }
 
 // ======================
@@ -103,7 +109,7 @@ function renderSchedules(date) {
 form.addEventListener("submit", e => {
   e.preventDefault();
 
-  const currentDate = dateInputs[0].value;
+  const currentDate = dateInputs[0].value || today;
 
   if (
     !tutorInput.value ||
@@ -128,8 +134,6 @@ form.addEventListener("submit", e => {
 
   renderSchedules(currentDate);
   form.reset();
-  dateInputs.forEach(input => input.value = today);
-  dateTexts.forEach(span => span.textContent = dayjs(today).format("DD/MM/YYYY"));
   hourInput.value = hour[0];
 });
 
@@ -148,7 +152,7 @@ document.addEventListener("click", e => {
     s => !(s.hour === time && s.date === date)
   );
 
-  li.remove();
+  renderSchedules(date); // Re-renderiza para manter sincronização
 });
 
 // ======================
@@ -198,8 +202,6 @@ function createCustomCalendar(year, month, appointments) {
       }
 
       dayEl.addEventListener("click", () => {
-        dateInputs.forEach(input => input.value = dateStr);
-        dateTexts.forEach(span => span.textContent = dayjs(dateStr).format("DD/MM/YYYY"));
         renderSchedules(dateStr);
         closeCalendar();
       });
@@ -233,7 +235,7 @@ function openCalendar() {
   overlay.classList.add("active");
   calendarSection.innerHTML = "";
 
-  const [y, m] = dateInputs[0].value.split("-").map(Number);
+  const [y, m] = (dateInputs[0].value || today).split("-").map(Number);
   const calendar = createCustomCalendar(y, m - 1, allSchedules);
   calendarSection.appendChild(calendar);
 }
@@ -244,7 +246,7 @@ function closeCalendar() {
 }
 
 // ======================
-// ABRIR AO CLICAR EM INPUTS OU SPANS
+// EVENTOS
 // ======================
 dateInputs.forEach(input => {
   input.addEventListener("click", e => {
@@ -262,18 +264,14 @@ dateTexts.forEach(span => {
   });
 });
 
-// ======================
-// FECHAR AO CLICAR FORA DO FORMULÁRIO OU CALENDÁRIO
-// ======================
+// Fecha calendário ao clicar fora
 document.addEventListener("click", e => {
   if (!form.contains(e.target) && !calendarSection.contains(e.target) && e.target !== overlay) {
     closeCalendar();
   }
 });
 
-// ======================
-// FECHAR QUANDO CLICAR NO OVERLAY
-// ======================
+// Fecha calendário ao clicar no overlay
 overlay.addEventListener("click", closeCalendar);
 
 // ======================

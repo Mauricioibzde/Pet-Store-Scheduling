@@ -253,7 +253,7 @@ position: absolute;
 
 .month-year-on-the-calendary {
     padding: 16px 26px;
-    border-radius: 10px;
+   
     border: none;
     font-weight: 800;
     letter-spacing: .3px;
@@ -327,7 +327,7 @@ position: absolute;
   justify-content: center;
   background-color: #6c5ce7;
   padding: 1rem 2rem;
-  border-radius: 1rem 0 1rem 0;
+  border-radius: 1rem 1rem 0rem 0rem;
   color: #fff;
   
   gap: 0.5rem;
@@ -363,7 +363,6 @@ position: absolute;
 
 
 .Calendar {
-  margin-bottom: 5rem;
   display: flex;
   justify-content: end;
   z-index: 20000000;

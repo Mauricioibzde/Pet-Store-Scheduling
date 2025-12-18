@@ -52,6 +52,6 @@
   }
 }
 @media (max-width: 520px){
-  .row{ grid-template-columns: 80px 1fr; }
+  .row{ grid-template-columns: 80px 1fr; align-items: baseline; }
   .col.service{ grid-column: 2 / -1; }
 }
