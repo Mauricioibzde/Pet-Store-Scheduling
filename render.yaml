@@ -11,7 +11,7 @@ services:
     name: pet-store-scheduling-api
     env: node
     buildCommand: npm install
-    startCommand: json-server --watch server.json --port $PORT
+    startCommand: node api/server.js
     envVars:
       - key: NODE_ENV
         value: production

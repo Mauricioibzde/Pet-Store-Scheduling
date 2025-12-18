@@ -22,7 +22,9 @@ This project was built as a **Rocketseat challenge**, focusing on clean UI, acce
 * JavaScript (ES6+)
 * Webpack 5
 * Babel
-* JSON Server (mock API)
+* Express.js (REST API)
+* SQLite3 (database)
+* Day.js (date manipulation)
 
 ---
 
@@ -33,6 +35,11 @@ assets/
 └── icon/              # Icons and images
 
 dist/                 # Production build (generated)
+
+api/
+├── server.js         # Express API
+├── sqlite.js         # SQLite integration
+└── data.sqlite       # Database file (auto-generated)
 
 src/
 ├── libs/
@@ -103,18 +110,32 @@ http://localhost:3000
 
 ---
 
-### Mock API (JSON Server)
+### API Server (Express + SQLite)
 
-To start only the fake backend:
+To start the API with database:
 
 ```bash
 npm run server
 ```
 
-Runs on:
+The API runs on:
 
 ```
 http://localhost:3333
+```
+
+**Database file** is auto-created at `api/data.sqlite` on first run.
+
+**Seed initial data** (optional):
+
+```bash
+curl -X POST http://localhost:3333/seed
+```
+
+Or via PowerShell:
+
+```powershell
+Invoke-RestMethod -Method POST -Uri http://localhost:3333/seed
 ```
 
 ---
@@ -156,6 +177,7 @@ Optional live demo: https://pet-store-scheduling.onrender.com/
 
 ## 📎 Key Files & Paths
 
+**Frontend:**
 - Entry point: `src/main.js`
 - Webpack config: `webpack.config.js`
 - HTML template: `index.html`
@@ -166,19 +188,28 @@ Optional live demo: https://pet-store-scheduling.onrender.com/
 - Hour list: `src/modules/form/load-schedules.js`
 - Schedule day integration: `src/modules/schedules/load.js`
 - Opening hours utility: `src/utils/opening-hours.js`
-- Mock API data: `server.json`
-- Render deployment config: `render.yaml`
+
+**Backend:**
+- API server: `api/server.js`
+- Database integration: `api/sqlite.js`
+- SQLite database: `api/data.sqlite` (auto-generated)
+- Legacy mock data: `server.json` (no longer used)
+
+**Config:**
+- Render deployment: `render.yaml`
+- Environment variables: `.env.example`
 
 ## 🔌 API (JSON Server)
+The API is now powered by **Express + SQLite** (previously JSON Server).
 
-JSON Server exposes the following resources from [server.json](server.json):
+Endpoints:
 
 - `GET /appointments`
 - `POST /appointments`
 - `DELETE /appointments/:id`
 - `GET /users`
 
-Sample appointment object:
+Sample appointment object returned:
 
 ```json
 {
@@ -203,6 +234,7 @@ Sample appointment object:
 ```env
 NODE_ENV=production
 API_URL=http://localhost:3333
+SQLITE_PATH=./api/data.sqlite
 ```
 
 ---
@@ -216,6 +248,7 @@ API_URL=http://localhost:3333
 ```powershell
 Get-Process node -ErrorAction SilentlyContinue | Stop-Process -Force
 npm run dev
+npm run server # start API
 ```
 
 ---

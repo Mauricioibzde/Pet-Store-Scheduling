@@ -61,8 +61,8 @@ document.addEventListener("DOMContentLoaded", loadSchedulesFromServer);
 function getTimeBlock(hour) {
   const h = parseInt(hour.split(":")[0]);
   if (h >= 9 && h < 12) return document.querySelector(".morning");
-  if (h >= 13 && h < 18) return document.querySelector(".afternoon");
-  if (h >= 19 && h < 21) return document.querySelector(".night");
+  if (h >= 12 && h < 19) return document.querySelector(".afternoon");
+  if (h >= 19 && h <= 21) return document.querySelector(".night");
   return document.querySelector(".morning");
 }
 
