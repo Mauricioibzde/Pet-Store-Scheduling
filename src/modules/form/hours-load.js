@@ -6,19 +6,17 @@ export function HoursLoad({ date }) {
     // Cria um objeto Dayjs com a data e hora exata
     const hourDate = dayjs(`${date}T${hour}:00`)
     
-    // Checa se a hora ainda não passou
-    const isHourPast = hourDate.isAfter(dayjs())
+    // Checa se a hora ainda não passou (horários futuros são disponíveis)
+    const isHourAvailable = hourDate.isAfter(dayjs())
 
     return {
       hour,
-      available: isHourPast
+      available: isHourAvailable
     }
   })
 
-  // Aqui você pode renderizar os horários ou retornar
-  opening.forEach(({ hour, available }) => {
-    console.log(`Hour: ${hour}, Available: ${available}`)
-  })
+  // Debug: log dos horários disponíveis
+  console.log(`Horários disponíveis para ${date}:`, opening.filter(h => h.available))
 
   return opening
 }

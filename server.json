@@ -1,4 +1,93 @@
 {
-  "appointments": [],
-  "users": []
+  "appointments": [
+    {
+      "id": 1,
+      "tutor": "Helena Souza",
+      "pet": "Cheddar",
+      "phone": "(55) 98524-5478",
+      "description": "Bath",
+      "date": "2024-12-18",
+      "hour": "09:00"
+    },
+    {
+      "id": 2,
+      "tutor": "Lucas Santos",
+      "pet": "Milo",
+      "phone": "(55) 98524-5808",
+      "description": "Grooming",
+      "date": "2024-12-18",
+      "hour": "14:00"
+    },
+    {
+      "id": 3,
+      "tutor": "Mariana Costa",
+      "pet": "Max",
+      "phone": "(55) 99999-1234",
+      "description": "Toenail Trim",
+      "date": "2024-12-18",
+      "hour": "11:00"
+    },
+    {
+      "id": 4,
+      "tutor": "João Pedro",
+      "pet": "Luna",
+      "phone": "(55) 98765-4321",
+      "description": "Full Service",
+      "date": "2024-12-19",
+      "hour": "10:00"
+    },
+    {
+      "id": 5,
+      "tutor": "Ana Paula",
+      "pet": "Bella",
+      "phone": "(55) 97654-3210",
+      "description": "Bath & Grooming",
+      "date": "2024-12-19",
+      "hour": "15:00"
+    },
+    {
+      "id": 6,
+      "tutor": "Carlos Mendes",
+      "pet": "Rocky",
+      "phone": "(55) 96543-2109",
+      "description": "Nail Care",
+      "date": "2024-12-20",
+      "hour": "13:00"
+    },
+    {
+      "tutor": "Mauricio",
+      "pet": "Hack",
+      "phone": "(55) 45454 -5478",
+      "description": "yydasd",
+      "date": "2025-12-18",
+      "hour": "09:00",
+      "id": 7
+    },
+    {
+      "tutor": "Mauricio",
+      "pet": "Hack",
+      "phone": "(55) 45454 -5478",
+      "description": "dsdsd",
+      "date": "2025-12-27",
+      "hour": "09:00",
+      "id": 8
+    },
+    {
+      "tutor": "sfdf",
+      "pet": "sdf",
+      "phone": "(23) 23 -2323",
+      "description": "sdadas",
+      "date": "2025-12-27",
+      "hour": "09:00",
+      "id": 9
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Pet Shop Manager",
+      "email": "manager@petworld.com",
+      "role": "admin"
+    }
+  ]
 }

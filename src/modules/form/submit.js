@@ -20,7 +20,8 @@ const dateTexts = document.querySelectorAll(".date-text");
 // ======================
 // HORÁRIOS
 // ======================
-const hour = ["08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00"];
+import { hour } from "./load-schedules.js";
+
 hourInput.innerHTML = "";
 hour.forEach(h => {
   const option = document.createElement("option");
@@ -37,11 +38,25 @@ const today = dayjs().format("YYYY-MM-DD");
 // ======================
 // AGENDAMENTOS
 // ======================
-let allSchedules = [
-  // Exemplo de agendamentos já existentes
-  { tutor: "Helena", pet: "Cheddar", phone: "(55) 45454 -5478", description: "Bath", date: today, hour: "09:00" },
-  { tutor: "Lucas", pet: "Milo", phone: "(55) 98524 -5808", description: "Grooming", date: today, hour: "14:00" }
-];
+let allSchedules = [];
+
+// Carrega agendamentos do servidor
+async function loadSchedulesFromServer() {
+  try {
+    const response = await fetch("http://localhost:3333/appointments");
+    const data = await response.json();
+    allSchedules = data || [];
+    renderSchedules(today);
+    console.log("✅ Agendamentos carregados do servidor:", allSchedules);
+  } catch (error) {
+    console.warn("⚠️ Erro ao carregar agendamentos do servidor:", error);
+    // Fallback com dados locais se servidor não estiver disponível
+    allSchedules = [];
+  }
+}
+
+// Carrega os agendamentos quando a página carrega
+document.addEventListener("DOMContentLoaded", loadSchedulesFromServer);
 
 function getTimeBlock(hour) {
   const h = parseInt(hour.split(":")[0]);
@@ -104,9 +119,31 @@ function renderSchedules(date = today) {
 }
 
 // ======================
+// SALVAR AGENDAMENTO
+// ======================
+async function saveScheduleToServer(appointment) {
+  try {
+    const response = await fetch("http://localhost:3333/appointments", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(appointment)
+    });
+    
+    if (!response.ok) throw new Error("Erro ao salvar");
+    
+    const saved = await response.json();
+    console.log("✅ Agendamento salvo no servidor:", saved);
+    return saved;
+  } catch (error) {
+    console.error("❌ Erro ao salvar agendamento:", error);
+    return appointment; // Retorna o agendamento local se falhar
+  }
+}
+
+// ======================
 // FORMULÁRIO
 // ======================
-form.addEventListener("submit", e => {
+form.addEventListener("submit", async e => {
   e.preventDefault();
 
   const currentDate = dateInputs[0].value || today;
@@ -123,14 +160,19 @@ form.addEventListener("submit", e => {
     return;
   }
 
-  allSchedules.push({
+  const newAppointment = {
     tutor: tutorInput.value,
     pet: petInput.value,
     phone: phoneInput.value,
     description: descInput.value,
     date: currentDate,
     hour: hourInput.value
-  });
+  };
+
+  // Salva no servidor
+  const savedAppointment = await saveScheduleToServer(newAppointment);
+  
+  allSchedules.push(savedAppointment);
 
   renderSchedules(currentDate);
   form.reset();
@@ -140,13 +182,39 @@ form.addEventListener("submit", e => {
 // ======================
 // REMOVER AGENDAMENTO
 // ======================
-document.addEventListener("click", e => {
+async function deleteScheduleFromServer(id) {
+  try {
+    const response = await fetch(`http://localhost:3333/appointments/${id}`, {
+      method: "DELETE"
+    });
+    
+    if (!response.ok) throw new Error("Erro ao deletar");
+    
+    console.log("✅ Agendamento deletado do servidor");
+    return true;
+  } catch (error) {
+    console.error("❌ Erro ao deletar agendamento:", error);
+    return false;
+  }
+}
+
+document.addEventListener("click", async e => {
   if (!e.target.classList.contains("remove")) return;
   e.preventDefault();
 
   const li = e.target.closest("li");
   const time = li.querySelector(".time").textContent;
   const date = li.querySelector(".date").textContent;
+
+  // Encontra o agendamento para obter o ID
+  const appointment = allSchedules.find(
+    s => s.hour === time && s.date === date
+  );
+
+  // Deleta do servidor se tiver ID
+  if (appointment?.id) {
+    await deleteScheduleFromServer(appointment.id);
+  }
 
   allSchedules = allSchedules.filter(
     s => !(s.hour === time && s.date === date)

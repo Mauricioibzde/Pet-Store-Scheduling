@@ -1,10 +1,18 @@
 import {HoursLoad} from "../form/hours-load.js"
 
-const selectedDate = document.querySelector(".date")
-
 export function schedulesDay(){
-
-const date = selectedDate.value
-HoursLoad({date})
-
+  // Seleciona o input de data do formulário
+  const selectedDate = document.querySelector(".date-form")
+  
+  if (!selectedDate) {
+    console.warn("Elemento de data não encontrado")
+    return
+  }
+  
+  const date = selectedDate.value
+  const availableHours = HoursLoad({ date })
+  
+  console.log(`Carregando agendamentos para ${date}`, availableHours)
+  
+  return availableHours
 }

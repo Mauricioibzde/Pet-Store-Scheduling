@@ -171,9 +171,7 @@
  
   border-radius: 12px;
 }
-.month-label {
-  
-}
+
 .month-year-on-the-calendary {
   display: flex;
   justify-content: space-between!important;
