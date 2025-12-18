@@ -1,10 +1,17 @@
 services:
+  # Frontend (Static Site)
   - type: web
-    name: pet-store-scheduling
-    env: node
+    name: pet-store-scheduling-frontend
+    env: static
     buildCommand: npm install && npm run build
-    startCommand: npx json-server --watch server.json --port 3333
     staticPublishPath: ./dist
+
+  # API (json-server)
+  - type: web
+    name: pet-store-scheduling-api
+    env: node
+    buildCommand: npm install
+    startCommand: json-server --watch server.json --port $PORT
     envVars:
       - key: NODE_ENV
         value: production

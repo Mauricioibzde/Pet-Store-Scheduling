@@ -20,8 +20,11 @@ module.exports = {
     static: {
       directory: path.join(__dirname, "dist")
     },
-    port: 3000,
-    open: true,
+    host: "0.0.0.0",
+    port: process.env.PORT || 3000,
+    allowedHosts: "all",
+    open: false,
+    hot: true,
     liveReload: true
   },
 
